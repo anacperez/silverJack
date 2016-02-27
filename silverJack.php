@@ -6,7 +6,10 @@ for($i = 0; $i < 53; $i++)
 {
     $deck[] = $i;
 }
+
 shuffle($deck);
+//since we need to have an array of 28 students, we could try doing a dictionary type of array
+$cohort_students = array();
 
 ?>
 <!DOCTYPE HTML>
