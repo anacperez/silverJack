@@ -1,3 +1,17 @@
 body{
-    background:;
+    background:url("img/cardBackground.jpg");
+    font-family: Verdana, Arial, Georgia;
+    background-size: 1915px 1000px;
+}
+h1{
+    color:white;
+    font-size: 75px;
+    text-shadow: 3px 3px black;
+}
+#header1{
+    background-color:black;
+    color:white;
+    text-align:center;
+    resize: both;
+    overflow: auto;
 }
