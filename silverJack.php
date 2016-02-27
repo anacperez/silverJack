@@ -15,6 +15,10 @@ $student_name = array(); //string, contains name of the players.
 
 $student_pic = array(); //string, contains location of image.
 
+$student_hand = array(); //holds the array of cards
+
+
+
 array_push($student_name, "gabe");
 array_push($student_name, "Ana");
 array_push($student_name, "Pepe");
@@ -28,6 +32,13 @@ array_push($student_pic, "natalia.png");
 
 function run()
 {
+    global $student_hand;
+    array_push($student_hand[0] , getHand());
+    array_push($student_hand[1] , getHand());
+    array_push($student_hand[2] , getHand());
+    array_push($student_hand[3] , getHand());
+    
+    
     
 }
 
