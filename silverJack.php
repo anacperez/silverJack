@@ -33,10 +33,10 @@ array_push($student_pic, "natalia.png");
 function run()
 {
     global $student_hand;
-    array_push($student_hand[0] , getHand());
-    array_push($student_hand[1] , getHand());
-    array_push($student_hand[2] , getHand());
-    array_push($student_hand[3] , getHand());
+    array_push($student_hand, getHand());
+    array_push($student_hand, getHand());
+    array_push($student_hand, getHand());
+    array_push($student_hand, getHand());
     
     
     
@@ -106,10 +106,25 @@ function getWinner()
     
     
     
+    return($user_options);
+    
 }
 
 
 
+function displayHand()
+{
+    
+    
+    for($i=0; $i<sizeof($student_hand); $i++)
+    {
+        for($j=0; $j<sizeof($student_hand); $j++)
+        {
+            echo "<img src=cards/$cardSuit/$cardValue.png>";
+            
+        }
+    }
+}
 
 
 
@@ -128,6 +143,8 @@ function getWinner()
         </div>
         <main style="color: red;">
             <?=getHand()?>
+            <?=run()?>
+            <?=displayHand()?>
         </main>
     </body>
 </html>
