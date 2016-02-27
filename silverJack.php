@@ -23,12 +23,17 @@ function getHand(){
         $card_suit = $suits[floor($random_card/ 13)]; 
         $card_value = ($random_card % 13) + 1;
         
-        $amount = $amount + $card_value;
-        
-        //removes the card that was chosen from the deck
-        unset($deck[$random_card]);
-        
-        array_push($user_options, $card_suit . "/" .$card_value);
+        if($amount + $card_value <= 42){
+            $amount = $amount + $card_value;
+            
+            //removes the card that was chosen from the deck
+            unset($deck[$random_card]);
+            
+            array_push($user_options, $card_suit . "/" .$card_value);
+        }
+        else{
+            break;
+        }
         
     }
     
