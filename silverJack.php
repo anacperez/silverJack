@@ -34,6 +34,7 @@ array_push($student_pic, "natalia");
 
 function run()
 {
+  // echo '<div>';
     global $student_hand;
     global $deck;
     global $suits;
@@ -46,7 +47,7 @@ function run()
 
     displayHand();
     getWinner();
-
+  //  echo '<div/>';
 }
 
 
@@ -195,25 +196,29 @@ function displayHand()
     $extPNG = ".png";
     $extJPG = "jpg";
     
-    
+    echo "<table>";
     for($i=0; $i<sizeof($student_hand); $i++)
     {
-        
+        echo'<tr>';
+        echo'<td>';
         echo"<img src=selfPhotos/" . $student_pic[$i] . ".jpg>";
-        
+        echo'</td>';
         
         $length = $student_hand[$i];
         
         for($j=0; $j<sizeof($length); $j++)
         {
+            echo'<td>';
             echo "<img src=cards/" .$student_hand[$i][$j] .".png>";
-            
+            echo'</td>';
         }
-        
+        echo'<td>';
         echo $student_card_value[$i];
-        
+        echo '</td>';
+        echo '</tr>';
         echo "<br/>";
     }
+    echo"</table>";
 }
 
 
@@ -228,24 +233,35 @@ function displayHand()
         </title>
         <style>
             form #button {
-                background-color: green;
                 text-align: center;
             }
         </style>
         <link rel="stylesheet" type = "text/css" href="styles.css">
     </head>
     <body>
+        <main>
         <div id="header1">
             <h1><center>SilverJack</center></h1>
         </div>
-        <main style="color: red;">
-            
-            <?=run()?>
+              <center>
+                      <?=run()?>
+              </center>
         <br/>
-        <form>
-            <button type="submit" onclick="<?php run() ?>"name="run" id="button">PlayAgain</button>
-        </form>
-         
         </main>
+        <form>
+           <center> <button type="submit" onclick="<?php run() ?>"name="run" id="button">PlayAgain</button></center>
+        </form>
+        <br />
+        <br />
+        
+         <hr>
+       <center><footer>
+            &copy: 2016
+            <br/> Disclaimer: The content of this webpage may not be acurate.
+            <br/>
+             <img src = "/img/csumb-logo.png">
+        </footer> </center> 
+        </hr>
+         
     </body>
 </html>

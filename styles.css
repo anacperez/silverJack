@@ -1,17 +1,45 @@
 body{
-    background:url("img/cardBackground.jpg");
+    background:url("img/backgroundBlack.jpg");
     font-family: Verdana, Arial, Georgia;
     background-size: 1915px 1000px;
 }
 h1{
-    color:white;
+    color:white; 
     font-size: 75px;
     text-shadow: 3px 3px black;
 }
 #header1{
     background-color:black;
-    color:white;
+    color:white; 
     text-align:center;
     resize: both;
     overflow: auto;
+}
+main{
+    color:white;
+}
+#button {
+    background-color:red; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+footer{
+    color:white;
+}
+table{
+    color:red;
+    font-weight: bold;
+    background-color: white;
+    border-spacing: 35px;
+    border-collapse: separate;
+    border: 5px solid black;
+}
+td {
+    height: 100px;
+    vertical-align: top;
 }
