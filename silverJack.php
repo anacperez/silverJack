@@ -20,8 +20,7 @@ $student_hand = array(); //holds the array of cards
 $repeats = array();
 
 
-
-array_push($student_name, "gabe");
+array_push($student_name, "Gabe");
 array_push($student_name, "Ana");
 array_push($student_name, "Pepe");
 array_push($student_name, "Natalia");
@@ -30,6 +29,7 @@ array_push($student_pic, "gabe");
 array_push($student_pic, "ana");
 array_push($student_pic, "pepe");
 array_push($student_pic, "natalia");
+
 
 
 function run()
@@ -112,18 +112,18 @@ function getWinner()
     $winner_pic;
     
     $temp_winner = $student_card_value[0];
-    $temp_winner_pic;
-    $temp_winner_name;
+    $temp_winner_pic = $student_pic[0];
+    $temp_winner_name = $student_name[0];
     $totalSum = $student_card_value[0];
     
     
-    for($i = 1; $i < 4; $i++)
+    for($i = 1; $i < 4; $i++) // iterates through whole list of the cards sum of each persons hand
     {
         $totalSum += $student_card_value[$i];
         
-        if( $temp_winner < $student_card_value[$i])
-        {
-            $temp_winner = $student_card_value[$i];
+        if( $temp_winner < $student_card_value[$i]) // if the temp hand is smaller than current value of student hand
+        {                                           //it puts the current value of student into the temp winner.
+            $temp_winner = $student_card_value[$i]; //also keeps track of the current student pic and name.
             $temp_winner_pic = $student_pic[$i];
             $temp_winner_name =$student_name[$i];
         }
@@ -137,6 +137,7 @@ function getWinner()
     echo "$winner_name is the winner! They received $totalSum points";
 
 }
+
 
 
 
@@ -177,6 +178,7 @@ function displayHand()
         echo "<br/>";
     }
 }
+
 
 
 
