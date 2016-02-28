@@ -2,12 +2,12 @@
 
 $suits = array("clubs", "diamonds", "hearts", "spades");
 $deck = array();
-for($i = 0; $i < 53; $i++)
+for($i = 1; $i < 53; $i++)
 {
     $deck[] = $i;
 }
 
-shuffle($deck);
+//shuffle($deck);
 //since we need to have an array of 28 students, we could try doing a dictionary type of array
 $student_card_value = array();
 
@@ -17,6 +17,8 @@ $student_pic = array(); //string, contains location of image.
 
 $student_hand = array(); //holds the array of cards
 
+$repeats = array();
+
 
 
 array_push($student_name, "gabe");
@@ -24,51 +26,70 @@ array_push($student_name, "Ana");
 array_push($student_name, "Pepe");
 array_push($student_name, "Natalia");
 
-array_push($student_pic, "gabe.jpg");
-array_push($student_pic, "ana.jgp");
-array_push($student_pic, "pepe.jpg");
-array_push($student_pic, "natalia.png");
+array_push($student_pic, "gabe");
+array_push($student_pic, "ana");
+array_push($student_pic, "pepe");
+array_push($student_pic, "natalia");
 
 
 function run()
 {
     global $student_hand;
+    global $deck;
+    global $suits;
     array_push($student_hand, getHand());
     array_push($student_hand, getHand());
     array_push($student_hand, getHand());
     array_push($student_hand, getHand());
 
+    displayHand();
     getWinner();
 
 }
-
-
-
 
 
 function getHand(){
     global $deck; 
     global $suits; 
     global $student_card_value;
+    global $repeats;
+    
+    $isFound = FALSE;
+   
     $user_options = array();
     $amount = 0;
     
     while($amount < 42){
-        $random_card = rand(1, 52);
+        $random_card = rand(1, sizeof($deck));
         $card_suit = $suits[floor($random_card/ 13)]; 
         $card_value = ($random_card % 13) + 1;
         
-        if($amount + $card_value <= 42){
+        for($i=0; $i<sizeof($repeats); $i++)
+        {
+            if($random_card === $repeats[$i])
+            {
+                $isFound = TRUE;
+                break;
+            }
+        }
+        
+        if($isFound === FALSE)
+        {
+            if($amount + $card_value <= 42){
             $amount = $amount + $card_value;
             
             //removes the card that was chosen from the deck
-            unset($deck[$random_card]);
+            //unset($GLOBALS[$deck[$random_card]]);
+            //array_push($repeats, $random_card);
             
             array_push($user_options, $card_suit . "/" .$card_value);
         }
         else{
             break;
         }
+            
+        }
+        
         
     }
     
@@ -112,7 +133,6 @@ function getWinner()
     $winner_name = $temp_winner_name;
     $winner_pic = $temp_winner_pic;
     
-    return($user_options);
     
     echo "$winner_name is the winner! They received $totalSum points";
 
@@ -122,15 +142,39 @@ function getWinner()
 
 function displayHand()
 {
+    global $student_pic;
+    global $student_hand;
+    global $student_card_value;
+    
+    $length;
+    
+    
+    $extPNG = ".png";
+    $extJPG = "jpg";
     
     
     for($i=0; $i<sizeof($student_hand); $i++)
     {
-        for($j=0; $j<sizeof($student_hand); $j++)
+        if($i === 3)
         {
-            echo "<img src=cards/$cardSuit/$cardValue.png>";
+            echo "<img src=selfPhotos/" .$student_pic[$i] . ".png>";
+        }
+        else
+        {
+            echo"<img src=selfPhotos/" . $student_pic[$i] . ".jpg>";
+        }
+        
+        $length = $student_hand[$i];
+        
+        for($j=0; $j<sizeof($length); $j++)
+        {
+            echo "<img src=cards/" .$student_hand[$i][$j] .".png>";
             
         }
+        
+        echo $student_card_value[$i];
+        
+        echo "<br/>";
     }
 }
 
@@ -150,9 +194,7 @@ function displayHand()
             <h1><center>SilverJack</center></h1>
         </div>
         <main style="color: red;">
-            <?=getHand()?>
-            <?=run()?>
-            <?=displayHand()?>
+            
             <?=run()?>
             
             
