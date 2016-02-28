@@ -226,6 +226,12 @@ function displayHand()
         <title>
             SilverJack!
         </title>
+        <style>
+            form #button {
+                background-color: green;
+                text-align: center;
+            }
+        </style>
         <link rel="stylesheet" type = "text/css" href="styles.css">
     </head>
     <body>
@@ -235,8 +241,11 @@ function displayHand()
         <main style="color: red;">
             
             <?=run()?>
-            
-            
+        <br/>
+        <form>
+            <button type="submit" onclick="<?php run() ?>"name="run" id="button">PlayAgain</button>
+        </form>
+         
         </main>
     </body>
 </html>
