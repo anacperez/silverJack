@@ -37,9 +37,9 @@ function run()
     array_push($student_hand, getHand());
     array_push($student_hand, getHand());
     array_push($student_hand, getHand());
-    
-    
-    
+
+    getWinner();
+
 }
 
 
@@ -82,32 +82,40 @@ function getHand(){
 
 function getWinner()
 {
-    global $winner_value;
-    global $winner_name;
-    global $winner_pic;
+    global $student_card_value;
+    global $student_name;
+    global $student_pic;
+    
+    $winner_value;
+    $winner_name;
+    $winner_pic;
+    
     $temp_winner = $student_card_value[0];
     $temp_winner_pic;
     $temp_winner_name;
+    $totalSum = $student_card_value[0];
     
-    for($i = 1; i < 4; $i++)
+    
+    for($i = 1; $i < 4; $i++)
     {
-        if( $temp_winner_value < $student_card_value[i])
+        $totalSum += $student_card_value[$i];
+        
+        if( $temp_winner < $student_card_value[$i])
         {
-            $temp_winner_Value = $student_card_value[i];
-            $temp_winner_pic = $student_name[i];
-            $temp_winner_name =$student_pic[i];
+            $temp_winner = $student_card_value[$i];
+            $temp_winner_pic = $student_pic[$i];
+            $temp_winner_name =$student_name[$i];
         }
         
     }
     $winner_value = $temp_winner;
     $winner_name = $temp_winner_name;
-    $winner_pic = $temp_winner_name;
-    
-    
-    
+    $winner_pic = $temp_winner_pic;
     
     return($user_options);
     
+    echo "$winner_name is the winner! They received $totalSum points";
+
 }
 
 
@@ -145,6 +153,9 @@ function displayHand()
             <?=getHand()?>
             <?=run()?>
             <?=displayHand()?>
+            <?=run()?>
+            
+            
         </main>
     </body>
 </html>
