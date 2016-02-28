@@ -2,7 +2,7 @@
 
 $suits = array("clubs", "diamonds", "hearts", "spades");
 $deck = array();
-for($i = 1; $i < 53; $i++)
+for($i = 1; $i < 52; $i++)
 {
     $deck[] = $i;
 }
@@ -42,6 +42,8 @@ function run()
     array_push($student_hand, getHand());
     array_push($student_hand, getHand());
 
+
+
     displayHand();
     getWinner();
 
@@ -60,11 +62,11 @@ function getHand(){
     $amount = 0;
     
     while($amount < 42){
-        $random_card = rand(1, sizeof($deck));
+        $random_card = rand(0, sizeof($deck));
         $card_suit = $suits[floor($random_card/ 13)]; 
         $card_value = ($random_card % 13) + 1;
         
-        for($i=0; $i<sizeof($repeats); $i++)
+        for($i=0; $i < sizeof($repeats); $i++)
         {
             if($random_card === $repeats[$i])
             {
@@ -79,7 +81,7 @@ function getHand(){
             $amount = $amount + $card_value;
             
             //removes the card that was chosen from the deck
-            //unset($GLOBALS[$deck[$random_card]]);
+            unset($GLOBALS[$deck[$random_card]]);
             //array_push($repeats, $random_card);
             
             array_push($user_options, $card_suit . "/" .$card_value);
@@ -107,6 +109,7 @@ function getWinner()
     global $student_name;
     global $student_pic;
     
+    $winners = array();
     $winner_value;
     $winner_name;
     $winner_pic;
@@ -116,25 +119,63 @@ function getWinner()
     $temp_winner_name = $student_name[0];
     $totalSum = $student_card_value[0];
     
-    
-    for($i = 1; $i < 4; $i++) // iterates through whole list of the cards sum of each persons hand
+    $max_value = max($student_card_value);
+    $name_position = 0;
+    for($i = 0; $i < 4; $i++) // iterates through whole list of the cards sum of each persons hand
     {
         $totalSum += $student_card_value[$i];
         
-        if( $temp_winner < $student_card_value[$i]) // if the temp hand is smaller than current value of student hand
+        if( $max_value === $student_card_value[$i]) // if the temp hand is smaller than current value of student hand
         {                                           //it puts the current value of student into the temp winner.
-            $temp_winner = $student_card_value[$i]; //also keeps track of the current student pic and name.
-            $temp_winner_pic = $student_pic[$i];
-            $temp_winner_name =$student_name[$i];
+            //$temp_winner = $student_card_value[$i]; //also keeps track of the current student pic and name.
+            //$temp_winner_pic = $student_pic[$i];
+            //$temp_winner_name =$student_name[$i];
+            //$name_position = $i;
+            array_push($winners, $student_pic[$i]);
         }
         
     }
     $winner_value = $temp_winner;
-    $winner_name = $temp_winner_name;
+   // $winner_name = $student_name[$name_position];
     $winner_pic = $temp_winner_pic;
     
     
-    echo "$winner_name is the winner! They received $totalSum points";
+    $counter = 0;
+    
+    for($i = 0; $i < sizeof($winners); $i++){
+        $name = $winners[$i];
+        $first_letter = substr($name, 0, 1);
+        if($first_letter === "n"){
+            $winner_name = "Natalia";
+             $counter++;
+        }
+        elseif($first_letter === "p"){
+            $winner_name = "Pepe";
+             $counter++;
+        }
+        elseif($first_letter == "a"){
+            $winner_name = "Ana";
+             $counter++;
+        }
+        elseif($first_letter == "g"){
+            $winner_name = "Gabe";
+             $counter++;
+        }
+        
+       
+        if($counter > 1)
+        {
+            echo " & ";
+        }
+        echo $winner_name;
+        
+    }
+    if($counter > 1){
+            echo " are the winners! They received $totalSum points";
+        }
+        else{
+            echo " is the winner! They received $totalSum points";
+        }
 
 }
 
@@ -149,6 +190,7 @@ function displayHand()
     
     $length;
     
+    shuffle($student_pic);
     
     $extPNG = ".png";
     $extJPG = "jpg";
@@ -156,14 +198,9 @@ function displayHand()
     
     for($i=0; $i<sizeof($student_hand); $i++)
     {
-        if($i === 3)
-        {
-            echo "<img src=selfPhotos/" .$student_pic[$i] . ".png>";
-        }
-        else
-        {
-            echo"<img src=selfPhotos/" . $student_pic[$i] . ".jpg>";
-        }
+        
+        echo"<img src=selfPhotos/" . $student_pic[$i] . ".jpg>";
+        
         
         $length = $student_hand[$i];
         
